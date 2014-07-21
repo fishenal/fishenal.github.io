@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Trader</title>
+  <script src="dep/require.js"></script>
+  <!--script src="dep/yu.js"></script-->
+
+  <!--script src="lib/jquery.js"></script>
+  <script src="lib/underscore.js"></script>
+  <script src="lib/backbone-min.js"></script>
+  <script src="lib/backbone.localStorage.js"></script-->
+</head>
+
+<body>
+  <table id="tble"></table>
+  <script type="text/javascript">
+    require(['dep/yu'],function(yu){
+          var mod1 = yu.model.factory({
+              'name':'yudonghan',
+              'score':'world'
+          })
+
+          var mod2 = yu.model.factory({
+              'name':'yx'
+          })
+
+          var view1 = yu.view.factory({
+              container:"#tble",
+              template:"<tr><td><%- name %></td><td><%- score %></td><td><a class='edit'>编辑</a></td><td><a class='delete'>delete</a></td></tr>",
+              events:{
+                  '.edit' : ['click',function(){
+                      mod1.name = "yudonghan2"
+                      yu.station.train(mod1, view1)
+                  }],
+                  '.delete' : ['click',function(){
+                      console.log('delete')
+                  }]
+              },
+              storeage:{
+                  name:"yudonghan",
+                  score:15
+              }
+          })
+
+          var view2 = yu.view.factory({
+              container:"#tble",
+              template:"<tr><td><%- name %></td><td><%- score %></td></tr>",
+              storeage:{
+                  name:"fish",
+                  score:35
+              }
+          })
+          
+          yu.station.train(mod1, view1)
+          //view1.render()
+          //view2.render()
+          //console.log(view1)
+    })
+  </script>
+</body>
+</html>

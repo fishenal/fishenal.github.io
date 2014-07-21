@@ -1,0 +1,80 @@
+require.config({
+	shim:{
+		'dep/underscore': {
+            exports: '_'
+        },
+        'dep/jquery' : {
+        	exports: '$'	
+        }
+	}
+});
+define(['dep/jquery', 'dep/underscore'],function($, _){
+	var yu = function(){};
+
+	yu.version = '0.0.1';
+
+	yu.model = function(){
+		//this.autoFill = false;
+		this.storeage = {}
+	}
+
+	yu.model.factory = function(source){
+		var tis = new this
+		//_this.storeage = {}
+
+		for(var key in source){
+			tis.storeage[key] = source[key]
+		}
+		return tis 
+	}
+
+	yu.model.prototype = {
+		get : function(prop){
+			return this.storeage[prop]
+		},
+		set : function(prop, value){
+			this.storeage[prop] = value
+		}
+	}
+
+	yu.view = function(father, data){
+		this.storeage = data
+		this.container = ""
+		this.template = ""
+	}
+
+	yu.view.factory = function(source){
+		var tis = new this
+		for(var key in source){
+			tis[key] = source[key]
+		}
+
+		return tis
+	}
+
+	yu.view.prototype = {
+		render : function(){
+			var tt = _.template(this.template)
+			$(this.container).append(tt(this.storeage))
+			if(this.events){
+				for(var key in this.events){
+					$(key).on(this.events[key][0],this.events[key][1])
+				}
+			}
+		}
+	}
+
+	yu.station = function(){
+
+	}
+
+	yu.station.train = function(from, to){
+		for(var key in from.storeage){
+			to.storeage[key] = from.storeage[key]
+		}
+
+		to.render()
+	}
+
+	return yu
+})
