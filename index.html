@@ -17,11 +17,33 @@
   <table id="tble"></table>
   <script type="text/javascript">
     require(['dep/yu'],function(yu){
-          var mod1 = yu.model.factory({
-              'name':'yudonghan',
-              'score':'world'
-          })
+          var mod1 = yu.model.factory()
+          
+          mod1.setData([{
+            'name':'yudonghan',
+            'score':50
+          },
+          {
+            'name':'yudonghan2',
+            'score':99
+          }])
 
+          mod1.setTemplate("<tr><td><%- data.name %></td><td><%- data.score %></td><td><a class='edit'>编辑</a></td><td><a class='delete'>delete</a></td></tr>",'#tble')
+
+          mod1.setCss("h1{font-size:24px;}")
+
+          mod1.setEvents([
+              {
+                  element:'.edit',
+                  event:'click',
+                  function:function(){
+                      console.log('h1 click')
+                  }
+              }
+          ])
+
+
+          /*
           var mod2 = yu.model.factory({
               'name':'yx'
           })
@@ -54,6 +76,7 @@
           })
           
           yu.station.train(mod1, view1)
+          */
           //view1.render()
           //view2.render()
           //console.log(view1)

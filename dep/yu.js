@@ -15,19 +15,53 @@ define(['dep/jquery', 'dep/underscore'],function($, _){
 
 	yu.model = function(){
 		//this.autoFill = false;
-		this.storeage = {}
+		this.data = {}
+
+		this.events = []
+
+		this.template = ""
+
+		this.css = ""
+
 	}
 
 	yu.model.factory = function(source){
-		var tis = new this
+		var me = new this
 		//_this.storeage = {}
-
 		for(var key in source){
-			tis.storeage[key] = source[key]
+			me[key] = source[key]
 		}
-		return tis 
+		return me 
 	}
 
+	yu.model.prototype.setTemplate = function(template, container){
+		
+		var list = "<% _.each(template_source, function(data) { %> <li><%= data.name %></li><li><%= data.score %></li> <% }); %>"
+		var tem = _.template(list, {template_source: this.data})
+		$(container).append(tem)
+
+		this.template = template
+
+		this.container = container
+	}
+
+	yu.model.prototype.setCss = function(css){
+		this.css = css
+		$(this.container).append('<style>'+css+'</style>')
+	}
+
+	yu.model.prototype.setEvents = function(events){
+		this.events = events
+		for(var i = 0,l = events.length;i < l;i++){
+			$(events[i].element).on(events[i].event,events[i].function)
+		}
+	}
+
+	yu.model.prototype.setData = function(data){
+		this.data = data
+	}
+
+/*
 	yu.model.prototype = {
 		get : function(prop){
 			return this.storeage[prop]
@@ -75,6 +109,6 @@ define(['dep/jquery', 'dep/underscore'],function($, _){
 
 		to.render()
 	}
-
+*/
 	return yu
 })
