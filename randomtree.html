@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Tree</title>
+  <script src="dep/require.js"></script>
+</head>
+
+<body>
+  <script type="text/javascript">
+      require.config({
+        shim:{
+          'dep/underscore':{
+              exports:"_"
+          }
+        }
+      })
+      require(['dep/raphael-min','dep/underscore'],function(raphael, _){
+          var paper = raphael(0, 0, 1000, 1000)
+
+          var pi = Math.PI;
+
+          function Ray(){
+
+            this.centerPoint = [650, 300, 50]
+
+            this.ball_radius = [5,10,20,30]
+
+            this.animate_time = 1800
+
+            this.num = 25
+
+            this.calPosition = function(angle, length){
+              return [Math.cos(angle)*length, Math.sin(angle)*length]
+            }
+
+            this.animate = function(x, y, ball_radius){
+                var c = paper.circle(this.centerPoint[0], this.centerPoint[1], ball_radius)
+                var l = paper.path("M"+this.centerPoint[0]+','+this.centerPoint[1])
+
+                l.animate({'path': "M"+this.centerPoint[0]+','+this.centerPoint[1]+"L"+','+x+','+y}, this.animate_time, "elastic")
+                c.animate({'cx': x,'cy': y}, this.animate_time, "elastic")
+            }
+            this.make = function(angle, length, radius){
+
+                var tm = this.calPosition(angle, length)
+                this.animate(this.centerPoint[0]+tm[0], this.centerPoint[1]+tm[1], radius)
+            }
+
+            this.init = function(){
+                paper.circle(this.centerPoint[0], this.centerPoint[1], this.centerPoint[2]).attr('fill', '#000')
+                for(var i = 0; i < this.num;i++){
+                    var length;
+                    if(i%2 == 0){
+                      length =  _.random(100, 150)
+                    }else{
+                      length =  _.random(200, 250)
+                    }
+                    this.make(pi*i*2/this.num, length, this.ball_radius[_.random(0, 3)]) 
+                } 
+            }
+
+          }
+
+          var ray = new Ray();
+          ray.init()
+
+
+          var mb = paper.circle(650, 300, 50).attr('fill', '#000')
+          
+
+          var center = [650,300];
+
+          function calPos(alph, length){
+              var a,b;
+
+              a = Math.cos(alph)*length
+              b = Math.sin(alph)*length
+              
+              return [a, b]
+          }
+          
+
+      })
+
+  </script>
+</body>
+</html>

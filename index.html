@@ -17,8 +17,21 @@
   <table id="tble"></table>
   <script type="text/javascript">
     require(['dep/yu'],function(yu){
-          var mod1 = yu.model.factory()
-          
+          var mod1 = yu.model.factory({
+            data:{
+              'name':'yudonghan',
+              'money':878764
+            }
+          })
+
+          console.log(mod1)
+
+          var view1 = yu.view.factory({
+              model:mod1
+          })
+
+          console.log(view1)
+          /*
           mod1.setData([{
             'name':'yudonghan',
             'score':50
@@ -41,7 +54,7 @@
                   }
               }
           ])
-
+          */
 
           /*
           var mod2 = yu.model.factory({
