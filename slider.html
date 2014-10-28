@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>slider</title>
+  <script src="dep/jquery.js"></script>
+  <style type="text/css">
+		img{
+			width:950px;
+			height:80px;
+		}
+		ul{
+			overflow: hidden;
+			height:80px;
+		}
+		li{
+			list-style:none;
+			height:80px;
+		}
+		.slides_index{
+			overflow:hidden;
+		}
+		.slides_index li{
+			float:left;
+			width:35px;
+			height:35px;
+			cursor:pointer;
+			background:#eee;
+			text-align: center;
+			line-height:35px;
+			margin-right:15px;
+		}
+  </style>
+</head>
+<body>
+	<ul class="slides">
+		<li>
+			<img src="http://fuss10.elemecdn.com/e/02/fff5afcbcbfdb14362a66b6aaebb9gif.gif">
+		</li>
+		<li>
+			<img src="http://fuss10.elemecdn.com/d/aa/10ea2f228dce4ef61c56c52ae5f9agif.gif">
+		</li>
+		<li>
+			<img src="http://fuss10.elemecdn.com/9/ca/11535dd72c1893b1a6dc8e530d968gif.gif">
+		</li>
+		<li>
+			<img src="http://fuss10.elemecdn.com/2/3b/3da2f96008313bb9833ad79767c44png.png">
+		</li>
+
+	</ul>
+	<ul class="slides_index">
+	</ul>
+	
+	<script>
+		
+    //start slide
+    $(function(){
+        var slides = $('.slides li').length;
+        var animating = false;
+
+        if (slides > 0) {
+            $('.slides').append($('.slides li:first').clone());
+
+            var slideShow = function () {
+                if ($('.slides').scrollTop() == 0) {
+                    $('.slides').scrollTop(slides * 80);
+                }
+                $('.slides').animate({ scrollTop: '-=80'})    
+            }
+            
+            var slideShowInterval = setInterval(slideShow, 1000);
+
+            for(var i=0;i<slides;i++){
+				$('.slides_index').append($('<li>',{
+					text:i + 1,
+					click:index_click
+				}));            	
+            }
+
+            function index_click(){
+            	var index = parseInt($(this).text()) - 1;
+            	clearInterval(slideShowInterval);
+            	$('.slides').stop().animate({ scrollTop: 80*index}) 
+            }
+
+            $('.slides_index,.slides').hover(function(){
+            	clearInterval(slideShowInterval);
+            },function(){
+            	slideShowInterval = setInterval(slideShow, 1000);
+            })
+        }    
+    })
+    
+    //end slide
+
+	</script>
+</body>
+</html>
