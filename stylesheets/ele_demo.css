@@ -1,0 +1,54 @@
+@charset "utf-8";
+
+/**
+ * common: reset
+ */
+body, div, p, dl, dt, dd, ul, ol, li, hr, pre, table, td, th, fieldset, legend, input, button, textarea, form, img, blockquote, h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    padding: 0;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+fieldset, iframe, img {
+    border: 0;
+}
+
+a img {
+    display: block;
+}
+
+caption, th {
+    text-align: left;
+}
+
+blockquote, q {
+    quotes: none;
+}
+
+sup {
+    vertical-align: text-top;
+}
+
+sub {
+    vertical-align: text-bottom;
+}
+
+li {
+    list-style: none;
+}
+
+/**
+ * common: base
+ */
+body {
+    font-size: 12px;
+    font-family: Arial, SimSun, sans-serif;
+    background: white;
+    color: #666666;
+    line-height: 1.5;
+    min-width: 950px;
+}
