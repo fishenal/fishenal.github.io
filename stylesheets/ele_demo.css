@@ -51,4 +51,17 @@ body {
     color: #666666;
     line-height: 1.5;
     min-width: 950px;
+    background:#c0deed;
+}
+.td_left{
+  float:left;
+  width:40%;
+}
+.td_right{
+  float:left;
+  width:60%;
+}
+.container{
+  width:1000px;
+  margin:0 auto;
 }
