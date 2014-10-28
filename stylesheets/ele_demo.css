@@ -55,13 +55,62 @@ body {
 }
 .td_left{
   float:left;
-  width:40%;
+  width:50px;
+  text-align:center;
+}
+.td_left p{
+	background:#ffe2e2;
 }
 .td_right{
   float:left;
-  width:60%;
+  padding-left:10px;
+  width:118px;
 }
 .container{
   width:1000px;
   margin:0 auto;
+}
+table{
+	background:white;
+	width:100%;
+}
+td{
+	padding:10px;
+	border:1px solid #ccc;
+	width:200px;
+}
+.star{
+	background:url(http://static10.elemecdn.com/images/forward/bg.gif) no-repeat -1px -193px;
+	width:61px;
+	height:14px;
+	display:inline-block;
+}
+.addicon{
+	color:white;
+	padding:2px;
+	border-radius: 2px;
+}
+.bg1{
+	background:orange;
+}
+.bg2{
+	background:#008fd7;
+}
+.bg3{
+	background:#d71900;
+}
+.container h1{
+	background:#fbfbfb;
+	border:1px solid #ccc;
+	border-bottom:none;
+	box-sizing:border-box;
+	padding:5px 15px;
+	margin-top:15px;
+	font-size:16px;
+	font-weight:normal;
+	
+}
+.container a{
+	color:#999;
+	text-decoration:none;
 }
